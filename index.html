@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <title>ITS iEnabler</title>
@@ -18,9 +19,7 @@ function Call_calendar(ctl) {
   calendar = window.open('w01pkg.call_cal', 'cal', 'WIDTH=250,HEIGHT=350');
   return false;
 }
-</script>
 
-<script language="Javascript1.2">
 function chk_mandatory() {
   if ((document.frmOne.x_idno.value != "") ||
       (document.frmOne.x_idno.value == "" &&
@@ -37,6 +36,18 @@ function chk_mandatory() {
     document.getElementById("z_names").style.display = "block";
     document.getElementById("z_birdat").style.display = "block";
   }
+}
+
+function validateIDNumber() {
+  const idNumber = document.getElementById('x_idno').value;
+  if (!idNumber && 
+      (!document.frmOne.x_surn.value || 
+       !document.frmOne.x_names.value || 
+       !document.frmOne.x_birdat.value)) {
+    alert('Please fill in the required fields.');
+    return false; // Prevent form submission
+  }
+  return true; // Allow form submission
 }
 </script>
 
@@ -57,7 +68,6 @@ function chk_mandatory() {
     border: 1px solid black;
   }
 </style>
-
 </head>
 <body class="framebody" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
 <div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
@@ -114,21 +124,12 @@ window.onunload = function() {
   </div>
 </form>
 
-<script language="Javascript1.2">
+<script>
 document.frmOne.x_idno.onblur = function() { chk_mandatory(); }
 document.frmOne.x_surn.onblur = function() { chk_mandatory(); }
 document.frmOne.x_names.onblur = function() { chk_mandatory(); }
 document.frmOne.x_birdat.onblur = function() { chk_mandatory(); }
 chk_mandatory();
-
-function validateIDNumber() {
-  const idNumber = document.getElementById('x_idno').value;
-  if (!idNumber) {
-    alert('Please enter an ID Number.');
-    return false; // Prevent form submission
-  }
-  return true; // Allow form submission
-}
 </script>
 
 <span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span>
